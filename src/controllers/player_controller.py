@@ -1,6 +1,6 @@
 import json
 
-from src.services.player_service import calculate_player_gear_score
+from src.services.player_service import calculate_player_gear_score, create_player_gear_entry
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -12,6 +12,13 @@ def get_player_gear_score():
     gear_score = calculate_player_gear_score(ap=int(values["ap"]), awakening_ap=int(values["aap"]),
                                              dp=int(values["dp"]))
     return jsonify({"gearScore": gear_score}), 200
+
+
+@app.route('/player/gearentry', methods=['POST'])
+def post_player_gear_entry():
+    values = json.loads(request.data)
+    result = create_player_gear_entry(values)
+    return jsonify(result), 200
 
 
 if __name__ == '__main__':
