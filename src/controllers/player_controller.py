@@ -1,9 +1,7 @@
 import json
-
 from src.services.player_service import calculate_player_gear_score, create_player_gear_entry
-from flask import Flask, jsonify, request
-
-app = Flask(__name__)
+from flask import jsonify, request
+from src.controllers import app
 
 
 @app.route('/player/gearscore', methods=['POST'])
